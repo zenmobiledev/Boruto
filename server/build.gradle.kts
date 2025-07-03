@@ -19,6 +19,13 @@ dependencies {
     implementation(libs.logback)
     implementation(libs.ktor.serverCore)
     implementation(libs.ktor.serverNetty)
+    implementation(libs.ktor.serverContentNegotiation)
+    implementation(libs.ktor.serverDefaultHeaders)
+    implementation(libs.ktor.serverCallLogging)
+    implementation(libs.ktor.clientContentNegotiation)
+    implementation(libs.ktor.serialization)
+    implementation(libs.koin.ktor)
+    implementation(libs.koin.logger)
     testImplementation(libs.ktor.serverTestHost)
     testImplementation(libs.kotlin.testJunit)
 }
