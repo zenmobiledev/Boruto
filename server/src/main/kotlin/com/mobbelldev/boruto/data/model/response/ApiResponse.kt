@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ApiResponse(
-    val success: String,
+    val success: Boolean,
     val message: String? = null,
     val prevPage: Int? = null,
     val nextPage: Int? = null,
