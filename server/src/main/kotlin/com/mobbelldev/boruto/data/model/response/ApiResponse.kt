@@ -1,4 +1,4 @@
-package com.mobbelldev.boruto.utils
+package com.mobbelldev.boruto.data.model.response
 
 import com.mobbelldev.boruto.data.model.Hero
 import kotlinx.serialization.Serializable
