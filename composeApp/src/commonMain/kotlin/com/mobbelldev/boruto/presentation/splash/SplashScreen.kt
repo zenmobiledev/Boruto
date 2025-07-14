@@ -1,13 +1,18 @@
 package com.mobbelldev.boruto.presentation.splash
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
@@ -22,11 +27,24 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SplashScreen(navHostController: NavHostController) {
-    Splash()
+    val degrees = remember { Animatable(initialValue = 0F) }
+
+    LaunchedEffect(key1 = true) {
+        degrees.animateTo(
+            targetValue = 360F,
+            animationSpec = tween(
+                durationMillis = 1000,
+                delayMillis = 200
+            )
+        )
+    }
+    Splash(
+        degrees = degrees.value
+    )
 }
 
 @Composable
-fun Splash() {
+fun Splash(degrees: Float) {
     if (isSystemInDarkTheme()) {
         Box(
             modifier = Modifier
@@ -35,6 +53,7 @@ fun Splash() {
             contentAlignment = Alignment.Center,
         ) {
             Image(
+                modifier = Modifier.rotate(degrees = degrees),
                 painter = painterResource(Res.drawable.shuriken),
                 contentDescription = stringResource(resource = Res.string.app_name)
             )
@@ -54,6 +73,7 @@ fun Splash() {
             contentAlignment = Alignment.Center
         ) {
             Image(
+                modifier = Modifier.rotate(degrees = degrees),
                 painter = painterResource(Res.drawable.shuriken),
                 contentDescription = stringResource(resource = Res.string.app_name)
             )
@@ -64,5 +84,7 @@ fun Splash() {
 @Composable
 @Preview
 fun SplashScreenPreview() {
-    Splash()
+    Splash(
+        degrees = 0F
+    )
 }

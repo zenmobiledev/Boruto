@@ -3,7 +3,8 @@ package com.mobbelldev.boruto
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.mobbelldev.boruto.presentation.splash.SplashScreenPreview
+import androidx.navigation.compose.rememberNavController
+import com.mobbelldev.boruto.navigation.SetupNavGraph
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 private lateinit var navHostController: NavHostController
@@ -12,12 +13,9 @@ private lateinit var navHostController: NavHostController
 @Preview
 fun App() {
     MaterialTheme {
-        SplashScreenPreview()
+        navHostController = rememberNavController()
+        SetupNavGraph(
+            navHostController = navHostController
+        )
     }
-//    MaterialTheme {
-//        navHostController = rememberNavController()
-//        SetupNavGraph(
-//            navHostController = navHostController
-//        )
-//    }
 }
