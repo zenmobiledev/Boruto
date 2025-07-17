@@ -1,9 +1,6 @@
 package com.mobbelldev.boruto.presentation.splash
 
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -11,7 +8,8 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -29,19 +27,19 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SplashScreen(navHostController: NavHostController) {
-    val infiniteTransition = rememberInfiniteTransition()
-    val degrees by infiniteTransition.animateFloat(
-        initialValue = 0F,
-        targetValue = 360F,
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                durationMillis = 2000,
-                easing = LinearEasing
+    val degrees = remember { Animatable(initialValue = 0F) }
+
+    LaunchedEffect(key1 = true) {
+        degrees.animateTo(
+            targetValue = 360F,
+            animationSpec = tween(
+                durationMillis = 1000,
+                delayMillis = 200
             )
         )
-    )
+    }
     Splash(
-        degrees = degrees
+        degrees = degrees.value
     )
 }
 
